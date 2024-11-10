@@ -4,33 +4,37 @@ const ticketsSold = document.getElementById("ticket-sold")
 const ticketsNotSold = document.getElementById("ticket-unsold")
 const resetTicket = document.getElementById("reset-button")
 
-let totalTickets = 100
-tickets.textContent = totalTickets;
+let totalTickets = 0;
 let numberOfTicketsBought = 0;
 
+tickets.addEventListener('input',updateTickets)
 buyTicket.addEventListener('click', ticketBought)
 ticketsSold.addEventListener('click', ticketSold)
 resetTicket.addEventListener('click', resetButtonTicket)
 
-function ticketBought() {
-    numberOfTicketsBought = numberOfTicketsBought + 1;
-    buyTicket.textContent = `Bought ${numberOfTicketsBought} ticket`;
+function updateTickets(){
+  totalTickets = parseInt(tickets.value) || 0; // Fallback to 0 if the input is not a number
+  const remainingTickets = totalTickets - numberOfTicketsBought;
+}
 
+function ticketBought(){
+    if (numberOfTicketsBought < totalTickets) {
+      numberOfTicketsBought++;
+      buyTicket.textContent = numberOfTicketsBought > 1 ?     
+      `Bought ${numberOfTicketsBought} tickets` 
+    : `Bought ${numberOfTicketsBought} ticket`;
     const remainingTickets = totalTickets - numberOfTicketsBought;
     ticketsNotSold.textContent = `${remainingTickets} Tickets UnSold`;
-    tickets.textContent = `${remainingTickets} Tickets On Sale`;
-  }
-
-  function ticketsOnSale(){
-    let updateTicketCount = parseInt(tickets.textContent)
-    updateTicketCount = updateTicketCount - numberOfTicketsBought;
-  }
-
+    }
+    else
+    {buyTicket.textContent = "No available ticket"}
+}
+    
 function ticketSold() {
   ticketsSold.textContent = `${numberOfTicketsBought} ticket${numberOfTicketsBought > 1 ? 's' : ''} sold!`;
 }
+
 function resetButtonTicket() {
-// Reset all counts and UI elements
    numberOfTicketsBought = 0;
    tickets.textContent = totalTickets;
    ticketsSold.textContent = "0";

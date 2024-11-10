@@ -36,8 +36,8 @@ body::before{
   padding-top: 20px;
 }
 button{
-    width:6.9rem;
-    height:3rem;
+    width:7.9rem;
+    height:3.5rem;
     margin-top: 0.8rem;
     border: 1.6px solid rgb(32, 34, 34);
     border-radius:10px ;
@@ -54,5 +54,14 @@ h2{
 }
 
 h2:first-child{
+  text-align: center;
+}
+
+input{
+  background-color: transparent;
+  border: 1px solid #323838;
+  border-radius: 5px;
+  width:6.9rem;
+  height:3rem;
   text-align: center;
 }
